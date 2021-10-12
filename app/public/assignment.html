@@ -19,6 +19,9 @@
     
     <!-- HTML CSS -->
     <link href="css/site.css" rel="stylesheet" type="text/css">
+
+    <!-- Vue.js script-->
+    <script src="https://unpkg.com/vue@next"></script>
   </head>
  
   <body>
@@ -51,7 +54,7 @@
                 </a>
 
                 <!-- Assignments -->
-                <a href="assignment.html" class="list-group-item list-group-item-action py-2 ripple">
+                <a href="assignment.html" class="list-group-item list-group-item-action py-2 ripple active">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                     <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                     <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -104,7 +107,53 @@
     <main>
         <div class="container pt-4">
 
-        
+        <!-- Table card -->
+        <!-- Table card was made with support of the following resource: https://bbbootstrap.com/snippets/bootstrap-5-user-social-profile-transition-effect-79746232 -->
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-7">
+                    <div class="card content_card p-3 py-4">
+                    <div class="text-center">
+                        <h1 class="mt-2 mb-0">Referee Assignment</h1> 
+                        <h6>Information about referee assignment to soccer games</h6>
+                    </div>
+
+                    <!-- Table information -->
+                    <table class="table" id="data_table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Handle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry the Bird</td>
+                                <td></td>
+                                <td>@twitter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Closing main container -->
         </div>
@@ -116,5 +165,14 @@
 
     <!-- JS for icons -->
     <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+
+    <!-- Table sort JS -->
+    <!-- Table sort JS made possible with the following resource: http://tristen.ca/tablesort/demo/ -->
+    <script src="js/tablesort.min.js"></script>
+    <script>
+        new Tablesort(document.getElementById("data_table"));
+    </script>
+
+    <script src="js/index.js"></script>
   </body>
 </html>
