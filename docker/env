@@ -1,0 +1,4 @@
+MYSQL_DATABASE=dsfp
+MYSQL_HOST=ds-final-project.ca43kwlpjumq.us-east-2.rds.amazonaws.com
+MYSQL_USER=msis_ds_fp
+MYSQL_PASSWORD=AntLearn0Venom0$
