@@ -1,153 +1,209 @@
-/* General CSS design */
+/* ==================== PAGE CSS ==================== */
 * {
-    font-family: 'Merriweather', serif;
-  }
+  font-family: 'Merriweather', serif;
+}
+
+body {
+  background-color: #f1f1f1;
+}
+
+
+
+/* ==================== NAVBAR ==================== */
+nav {
+  background-color: #1181B2;
+}
+
+.navbar-brand {
+  transform: scale(2);
+  margin-left: 30px;
+}
+
+
+
+/* ==================== SIDEBAR ==================== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 58px 0 0; /* Height of navbar */
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+  width: 240px;
+  z-index: 600;
   
-  body {
-    background-color: #f1f1f1;
-  }
-  
-  /* Navbar */
-  nav {
-    background-color: #1181B2;
-  }
-  
-  .navbar-brand {
-    transform: scale(2);
-    margin-left: 30px;
-  }
-  
-  
-  /* Sidebar */
+}
+
+.sidebar .active {
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  background-color: #1181B2;
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+@media (max-width: 991.98px) {
   .sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    padding: 58px 0 0; /* Height of navbar */
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
-    width: 240px;
-    z-index: 600;
-    
+    width: 100%;
   }
-  
-  .sidebar .active {
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-    background-color: #1181B2;
+}
+
+/* Positioning media with the sidebar */
+@media (min-width: 991.98px) {
+  main {
+    padding-left: 240px;
   }
-  
-  .sidebar-sticky {
+}
+
+
+
+/* ==================== CONTENT CARD ==================== */
+.content_card {
+    border: none;
     position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.content_card:before {
+    content: "";
+    position: absolute;
+    left: 0;
     top: 0;
-    height: calc(100vh - 48px);
-    padding-top: 0.5rem;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-  }
+    width: 4px;
+    height: 100%;
+    background-color: #DDEDF4;
+    transform: scaleY(1);
+    transition: all 0.5s;
+    transform-origin: bottom
+}
+
+.content_card:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: #1181B2;
+    transform: scaleY(0);
+    transition: all 0.5s;
+    transform-origin: bottom
+}
+
+.content_card:hover::after {
+    transform: scaleY(1)
+}  
+
+
+
+/* ==================== TABLE ==================== */
+/* Table CSS was made possible with the following resource: https://github.com/tristen/tablesort/blob/gh-pages/tablesort.css */
+#data_table th[role=columnheader]:not(.no-sort) {
+  cursor: pointer;
+}
   
-  @media (max-width: 991.98px) {
-    .sidebar {
-      width: 100%;
-    }
-  }
+#data_table th[role=columnheader]:not(.no-sort):after {
+  content: '';
+  float: right;
+  margin-top: 7px;
+  border-width: 0 4px 4px;
+  border-style: solid;
+  border-color: #404040 transparent;
+  visibility: hidden;
+  opacity: 0;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
   
-  /* Positioning media with the sidebar */
-  @media (min-width: 991.98px) {
-    main {
-      padding-left: 240px;
-    }
-  }
+#data_table th[aria-sort=ascending]:not(.no-sort):after {
+  border-bottom: none;
+  border-width: 4px 4px 0;
+}
   
+#data_table th[aria-sort]:not(.no-sort):after {
+  visibility: visible;
+  opacity: 0.4;
+}
   
-  /* Content cards */
-  .content_card {
-      border: none;
-      position: relative;
-      overflow: hidden;
-      border-radius: 15px;
-      box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-  }
-  
-  .content_card:before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 4px;
-      height: 100%;
-      background-color: #DDEDF4;
-      transform: scaleY(1);
-      transition: all 0.5s;
-      transform-origin: bottom
-  }
-  
-  .content_card:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 4px;
-      height: 100%;
-      background-color: #1181B2;
-      transform: scaleY(0);
-      transition: all 0.5s;
-      transform-origin: bottom
-  }
-  
-  .content_card:hover::after {
-      transform: scaleY(1)
-  }  
+#data_table th[role=columnheader]:not(.no-sort):hover:after {
+  visibility: visible;
+  opacity: 1;
+}
+
+.table button {
+  margin: 0px 2px 0px 2px;
+}
+
+.table_data_card {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  margin: 5px 0px 5px 0px;
+  font-stretch: condensed;
+}
+
+.table_data_card .card_title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.table_data_card .card_information {
+  font-size: 12px;
+}
+
+.selected {
+  color: white;
+  background-color: #1181B2;
+}
 
 
 
+/* ==================== FORMS ==================== */
+.data_form {
+  font-size: 14px;
+  border-left: 3px #1181B2 solid;
+  padding-left: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.form_text {
+  margin-top: 30px;
+}
+
+.form_button {
+  margin: 2px;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #1181B2;
+}
 
 
 
+/* ==================== REPORTS ==================== */
+.report_selection {
+  padding: 10px 0px 10px 0px;
+}
 
 
 
-
-
-/* CHANGE LATER */
-
-
-  /* Table CSS was made possible with the following resource: https://github.com/tristen/tablesort/blob/gh-pages/tablesort.css */
-#bookTable th[role=columnheader]:not(.no-sort) {
-    cursor: pointer;
-  }
-    
-  #bookTable th[role=columnheader]:not(.no-sort):after {
-    content: '';
-    float: right;
-    margin-top: 7px;
-    border-width: 0 4px 4px;
-    border-style: solid;
-    border-color: #404040 transparent;
-    visibility: hidden;
-    opacity: 0;
-    -ms-user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-  }
-    
-  #bookTable th[aria-sort=ascending]:not(.no-sort):after {
-    border-bottom: none;
-    border-width: 4px 4px 0;
-  }
-    
-  #bookTable th[aria-sort]:not(.no-sort):after {
-    visibility: visible;
-    opacity: 0.4;
-  }
-    
-  #bookTable th[role=columnheader]:not(.no-sort):hover:after {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .book-form {
-    border-left: 3px #533EAB solid;
-    padding-left: 20px;
-  }
+/* ==================== INDEX.HTML ==================== */
+.soccer_image {
+  border-radius: 50%;
+  max-height: 300px;
+  border: #1181B2;
+  border-style: solid;
+  border-width: 2px;
+  margin: 20px;
+}
