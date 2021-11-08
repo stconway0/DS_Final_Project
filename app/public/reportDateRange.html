@@ -19,6 +19,9 @@
     
     <!-- HTML CSS -->
     <link href="css/site.css" rel="stylesheet" type="text/css">
+
+    <!-- Vue.js script-->
+    <script src="https://unpkg.com/vue@next"></script>
   </head>
  
   <body>
@@ -122,39 +125,75 @@
 
     <!--Main layout-->
     <main>
-        <div class="container pt-4">
+        <div class="container pt-4" id="reportDateRangeApp">
 
         <!-- Table card -->
         <!-- Table card was made with support of the following resource: https://bbbootstrap.com/snippets/bootstrap-5-user-social-profile-transition-effect-79746232 -->
         <div class="container mt-5">
             <div class="row d-flex justify-content-center">
-                <div class="col-md-7">
+                <div class="col-md-10">
                     <div class="card content_card p-3 py-4">
                         <div class="text-center">
-                            <h1 class="mt-2 mb-0">Reports</h1> 
-                            <h6>Access to various reports</h6>
+                            <h1 class="mt-2 mb-0">Date Range Report</h1> 
+                            <h6>A report that lists all games assigned to a referee in a given date range</h6>
                         </div>
 
-                        <!-- Buttons to reports -->
-                        <div class="report_selection">
-                            <!-- Report: Date Range-->
-                            <div class="row">
-                                <div class="col-3">
-                                    <a class="btn btn-primary" href="reportDateRange.html" role="button">Report Link</a>
-                                </div>
-                                <div class="col-9">
-                                    A report that lists all games assigned to a referee in a given date range.
-                                </div>
-                            </div><hr>
+                        <!-- Table information -->
+                        <table class="table table-striped" id="data_table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Game Title</th>
+                                    <th scope="col">Field</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="game in games">
+                                    <td>{{game.title}}</td>
+                                    <td>{{game.field}}</td>
+                                    <td>{{game.date}}</td>
+                                    <td>{{game.time}}</td>
+                                    <td>{{game.level}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                            <!-- Report: Unassigned-->
-                            <div class="row">
-                                <div class="col-3">
-                                    <a class="btn btn-primary" href="reportUnassigned.html" role="button">Report Link</a>
-                                </div>
-                                <div class="col-9">
-                                    A report that lists all future games with at least one position of status “Unassigned”
-                                </div>
+                        <!-- Report form -->
+                        <div class="d-flex row">
+                            <div class="col-4">
+                                <h3 class="text-center form_text">Download Report For Specified Dates</h3>
+                            </div>
+
+                            <div class="col-8 data_form">
+                                <form v-on:submit.prevent="postGame" class="needs-validation">
+                                    <!-- Referee -->
+                                    <div class="form-group row">
+                                        <label class="col-4" for="referee_id">Referee</label>
+                                        <select class="col-8 mb-3" class="form-control form-control-sm" v-model="gameForm.referee_id" id="referee_id" required="required">
+                                            <option v-for="r in referees" :value="r.referee_id">{{r.first_name}} {{r.last_name}}</option> 
+                                        </select>
+                                    </div>
+
+                                    <!-- Date parameters -->
+                                    <div class="from-group row">
+                                        <div class="col-6 mb-3">
+                                            <label for="minDate">Minimum Date Range</label>
+                                            <input type="date" class="form-control form-control-sm" v-model="gameForm.minDate" id="minDate" required="required"> 
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label for="maxDate">Maximum Date Range</label>
+                                            <input type="date" class="form-control form-control-sm" v-model="gameForm.maxDate" id="maxDate" required="required">
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Submit button -->
+                                    <div class="text-center">                                  
+                                        <a class="btn btn-primary" role="button" v-bind:href="'/api/reportDateRange/?referee_id=' + gameForm.referee_id + '&minDate=' + gameForm.minDate + '&maxDate=' + gameForm.maxDate + '&format=csv'" download>Export as CSV</a>
+                                    </div>
+                                
+                                </form>
                             </div>
                         </div>
 
@@ -173,5 +212,14 @@
 
     <!-- JS for icons -->
     <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+
+    <!-- Table sort JS -->
+    <!-- Table sort JS made possible with the following resource: http://tristen.ca/tablesort/demo/ -->
+    <script src="js/tablesort.min.js"></script>
+    <script>
+        new Tablesort(document.getElementById("data_table"));
+    </script>
+
+    <script src="js/reportDateRange.js"></script>
   </body>
 </html>

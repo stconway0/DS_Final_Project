@@ -191,44 +191,19 @@ nav {
 
 
 
-
-
-
-
-
-
-
-
-
-/*
-
-.form_button {
-  background-color: #533EAB;
-  max-width: 35px;
-  border-radius: 15px;
-  padding-left: 10px;
-  padding-right: 10px;
-  -webkit-transition: max-width 0.3s ease-in-out;
-  -moz-transition: max-width 0.3s ease-in-out;
-  -o-transition: max-width 0.3s ease-in-out;
-  transition: max-width 0.3s linear;
-}
-
-.form_button:hover {
-  background-color: #533EAB;
-  color: white;
-  max-width: 150px
-}
-
-.form_button_text {
-  display: block;
-  white-space: nowrap;
-  color: white;
-}
-
-.form_button_position {
-  padding-top: 20px;
+/* ==================== REPORTS ==================== */
+.report_selection {
+  padding: 10px 0px 10px 0px;
 }
 
 
-*/
+
+/* ==================== INDEX.HTML ==================== */
+.soccer_image {
+  border-radius: 50%;
+  max-height: 300px;
+  border: #1181B2;
+  border-style: solid;
+  border-width: 2px;
+  margin: 20px;
+}

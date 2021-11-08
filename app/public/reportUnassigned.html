@@ -19,6 +19,9 @@
     
     <!-- HTML CSS -->
     <link href="css/site.css" rel="stylesheet" type="text/css">
+
+    <!-- Vue.js script-->
+    <script src="https://unpkg.com/vue@next"></script>
   </head>
  
   <body>
@@ -122,42 +125,45 @@
 
     <!--Main layout-->
     <main>
-        <div class="container pt-4">
+        <div class="container pt-4" id="reportUnassignedApp">
 
         <!-- Table card -->
         <!-- Table card was made with support of the following resource: https://bbbootstrap.com/snippets/bootstrap-5-user-social-profile-transition-effect-79746232 -->
         <div class="container mt-5">
             <div class="row d-flex justify-content-center">
-                <div class="col-md-7">
+                <div class="col-md-10">
                     <div class="card content_card p-3 py-4">
                         <div class="text-center">
-                            <h1 class="mt-2 mb-0">Reports</h1> 
-                            <h6>Access to various reports</h6>
+                            <h1 class="mt-2 mb-0">"Unassigned" Report</h1> 
+                            <h6>A report that lists all future games with at least one position of status “Unassigned”</h6>
                         </div>
 
-                        <!-- Buttons to reports -->
-                        <div class="report_selection">
-                            <!-- Report: Date Range-->
-                            <div class="row">
-                                <div class="col-3">
-                                    <a class="btn btn-primary" href="reportDateRange.html" role="button">Report Link</a>
-                                </div>
-                                <div class="col-9">
-                                    A report that lists all games assigned to a referee in a given date range.
-                                </div>
-                            </div><hr>
-
-                            <!-- Report: Unassigned-->
-                            <div class="row">
-                                <div class="col-3">
-                                    <a class="btn btn-primary" href="reportUnassigned.html" role="button">Report Link</a>
-                                </div>
-                                <div class="col-9">
-                                    A report that lists all future games with at least one position of status “Unassigned”
-                                </div>
-                            </div>
+                        <!-- Table information -->
+                        <table class="table table-striped" id="data_table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Game Title</th>
+                                    <th scope="col">Field</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="game in games">
+                                    <td>{{game.title}}</td>
+                                    <td>{{game.field}}</td>
+                                    <td>{{game.date}}</td>
+                                    <td>{{game.time}}</td>
+                                    <td>{{game.level}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="text-center">                                                   
+                            <a class="btn btn-primary" role="button" href="/api/reportUnassigned/?&format=csv" download>Export as CSV</a>
                         </div>
-
+                             
                     </div>
                 </div>
             </div>
@@ -173,5 +179,7 @@
 
     <!-- JS for icons -->
     <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+
+    <script src="js/reportUnassigned.js"></script>
   </body>
 </html>

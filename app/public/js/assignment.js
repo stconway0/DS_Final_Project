@@ -85,7 +85,7 @@ const AssignmentApp = {
       .then( response => response.json() )
       .then( json => {
         console.log("Returned from post:", json);
-        this.ssignments = json;
+        this.assignments = json;
         this.handleResetEdit();
       });
     },
