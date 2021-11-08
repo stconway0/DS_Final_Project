@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
     <!-- Page title -->
-    <title>Referee Information Page</title>
+    <title>Assignment Page</title>
   
     <!-- Applying fonts -->
     <!-- Fonts taken from the following resource: https://fonts.google.com/share?selection.family=Merriweather -->
@@ -19,9 +19,6 @@
     
     <!-- HTML CSS -->
     <link href="css/site.css" rel="stylesheet" type="text/css">
-
-    <!-- Vue.js script-->
-    <script src="https://unpkg.com/vue@next"></script>
   </head>
  
   <body>
@@ -64,7 +61,7 @@
                 </a>
 
                 <!-- Referee -->
-                <a href="referee.html" class="list-group-item list-group-item-action py-2 ripple active">
+                <a href="referee.html" class="list-group-item list-group-item-action py-2 ripple">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                     </svg>
@@ -80,9 +77,9 @@
                     
                     <span>Ref. Assignment</span>
                 </a>
-                
+
                 <!-- Reports -->
-                <a href="report.html" class="list-group-item list-group-item-action py-2 ripple">
+                <a href="report.html" class="list-group-item list-group-item-action py-2 ripple active">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-data" viewBox="0 0 16 16">
                         <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
                         <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
@@ -91,7 +88,7 @@
                     
                     <span>Reports</span>
                 </a>
-
+                
                 </div>
             </div>
         </nav>
@@ -116,7 +113,7 @@
 
                 <!-- Brand -->
                 <a class="navbar-brand" href="index.html">
-                    <span class="iconify" data-icon="noto:soccer-ball"></span>
+                <span class="iconify" data-icon="noto:soccer-ball"></span>
                 </a>
 
             </div>
@@ -125,91 +122,46 @@
 
     <!--Main layout-->
     <main>
-        <div class="container pt-4" id="RefereeApp">
+        <div class="container pt-4">
 
-            <!-- Table card -->
-            <!-- Table card was made with support of the following resource: https://bbbootstrap.com/snippets/bootstrap-5-user-social-profile-transition-effect-79746232 -->
-            <div class="container mt-5">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-10">
-                        <div class="card content_card p-3 py-4">
-                            
-                            <div class="text-center">
-                                <h1 class="mt-2 mb-0">Referees</h1> 
-                                <h6>Information about available referees</h6>
-                            </div>
-
-                            <!-- Table information -->
-                            <table class="table table-striped" id="data_table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Grade</th>
-                                        <th scope="col">Skill</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="referee in referees">
-                                        <td>{{referee.first_name}}</td>
-                                        <td>{{referee.last_name}}</td>
-                                        <td>{{referee.grade}}</td>
-                                        <td>{{referee.skill}}</td>
-                                        <td>
-                                            <button type="button" v-on:click="handleEditReferee(referee)" class="btn btn-outline-secondary btn-sm">Edit</button>
-                                            <button type="button" v-on:click="postDeleteReferee(referee)" class="btn btn-outline-secondary btn-sm">Delete</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <!-- Table form -->
-                            <div class="d-flex row">
-                                <div class="col-4">
-                                    <h3 class="text-center form_text">Add / Edit Referee Information</h3>
-                                </div>
-
-                                <div class="col-8 data_form">
-                                    <form v-on:submit.prevent="postReferee" class="needs-validation">
-                                        <!-- First & last name -->
-                                        <div class="from-group row">
-                                            <div class="col-6 mb-3">
-                                                <label class="col-3" for="first_name">First Name</label>
-                                                <input type="text" v-model="refereeForm.first_name" class="form-control form-control-sm col-9" id="first_name" placeholder="First name" required="required"> 
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                                <label for="last_name">Last Name</label>
-                                                <input type="text" v-model="refereeForm.last_name" class="form-control form-control-sm" id="last_name" placeholder="Last name" required="required">
-                                            </div>
-                                        </div>
-
-                                        <!-- Game grade & skill-->
-                                        <div class="from-group row">
-                                            <div class="col-6 mb-3">
-                                                <label class="col-3" for="grade">Grade</label>
-                                                <input type="number" min="1" max="10" v-model="refereeForm.grade" class="form-control form-control-sm col-9" id="grade" placeholder="Referee grade" required="required"> 
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                                <label for="skill">Referee Skill</label>
-                                                <input type="number" min="0" max="100" v-model="refereeForm.skill" class="form-control form-control-sm" id="skill" placeholder="Referee skill" required="required">
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Submit button -->
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary form_button" >{{ selectedReferee === null ? "Add" : "Edit"}} Referee</button>
-                                            <button type="button" class="btn btn-outline-secondary form_button" v-if="selectedReferee" v-on:click="handleResetEdit">Cancel Edit</button>
-                                        </div>
-                                    
-                                    </form>
-                                </div>
-                            </div>
-
+        <!-- Table card -->
+        <!-- Table card was made with support of the following resource: https://bbbootstrap.com/snippets/bootstrap-5-user-social-profile-transition-effect-79746232 -->
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-7">
+                    <div class="card content_card p-3 py-4">
+                        <div class="text-center">
+                            <h1 class="mt-2 mb-0">Reports</h1> 
+                            <h6>Access to various reports</h6>
                         </div>
+
+                        <!-- Buttons to reports -->
+                        <div class="report_selection">
+                            <!-- Report: Date Range-->
+                            <div class="row">
+                                <div class="col-3">
+                                    <a class="btn btn-primary" href="reportDateRange.html" role="button">Report Link</a>
+                                </div>
+                                <div class="col-9">
+                                    A report that lists all games assigned to a referee in a given date range.
+                                </div>
+                            </div><hr>
+
+                            <!-- Report: Unassigned-->
+                            <div class="row">
+                                <div class="col-3">
+                                    <a class="btn btn-primary" href="reportUnassigned.html" role="button">Report Link</a>
+                                </div>
+                                <div class="col-9">
+                                    A report that lists all future games with at least one position of status “Unassigned”
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
+        </div>
 
         <!-- Closing main container -->
         </div>
@@ -221,14 +173,5 @@
 
     <!-- JS for icons -->
     <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
-
-    <!-- Table sort JS -->
-    <!-- Table sort JS made possible with the following resource: http://tristen.ca/tablesort/demo/ -->
-    <script src="js/tablesort.min.js"></script>
-    <script>
-        new Tablesort(document.getElementById("data_table"));
-    </script>
-
-    <script src="js/referee.js"></script>
   </body>
 </html>
