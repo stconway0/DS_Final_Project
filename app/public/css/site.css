@@ -141,9 +141,53 @@ nav {
   opacity: 1;
 }
 
+.table button {
+  margin: 0px 2px 0px 2px;
+}
+
+.table_data_card {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  margin: 5px 0px 5px 0px;
+  font-stretch: condensed;
+}
+
+.table_data_card .card_title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.table_data_card .card_information {
+  font-size: 12px;
+}
+
+.selected {
+  color: white;
+  background-color: #1181B2;
+}
+
 
 
 /* ==================== FORMS ==================== */
+.data_form {
+  font-size: 14px;
+  border-left: 3px #1181B2 solid;
+  padding-left: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.form_text {
+  margin-top: 30px;
+}
+
+.form_button {
+  margin: 2px;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #1181B2;
+}
 
 
 
@@ -151,3 +195,40 @@ nav {
 
 
 
+
+
+
+
+
+/*
+
+.form_button {
+  background-color: #533EAB;
+  max-width: 35px;
+  border-radius: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  -webkit-transition: max-width 0.3s ease-in-out;
+  -moz-transition: max-width 0.3s ease-in-out;
+  -o-transition: max-width 0.3s ease-in-out;
+  transition: max-width 0.3s linear;
+}
+
+.form_button:hover {
+  background-color: #533EAB;
+  color: white;
+  max-width: 150px
+}
+
+.form_button_text {
+  display: block;
+  white-space: nowrap;
+  color: white;
+}
+
+.form_button_position {
+  padding-top: 20px;
+}
+
+
+*/

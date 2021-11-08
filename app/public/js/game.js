@@ -1,21 +1,21 @@
-const RefereeApp = {
+const GameApp = {
     /* Storing data */
     data() {
         return {
-            referees: [],
-            refereeForm: {},
-            selectedReferee: null
+            games: [],
+            gameForm: {},
+            selectedGame: null
         }
     },
     computed: {},
-    methods: {     
+    methods: {    
       /* Fetching data from API */
-      fetchRefereesData() {
-        fetch('/api/referee/')
+      fetchGamesData() {
+        fetch('/api/game/')
         .then( response => response.json() )
         .then( (responseJson) => {
           console.log(responseJson);
-          this.referees = responseJson;
+          this.games = responseJson;
         })
         .catch( (err) => {
           console.error(err);
@@ -23,20 +23,20 @@ const RefereeApp = {
       },
       
       /* Function to check if data is being added or edited */
-      postReferee(evt){
-        console.log ("Test:", this.selectedReferee);
-        if (this.selectedReferee) {
-            this.postEditReferee(evt);
+      postGame(evt){
+        console.log ("Test:", this.selectedGame);
+        if (this.selectedGame) {
+            this.postEditGame(evt);
         } else {
-            this.postNewReferee(evt);
+            this.postNewGame(evt);
         }
       },
       
       /* Post new data */
-      postNewReferee(evt) {
-        fetch('api/referee/create.php', {
+      postNewGame(evt) {
+        fetch('api/game/create.php', {
           method:'POST',
-          body: JSON.stringify(this.refereeForm),
+          body: JSON.stringify(this.gameForm),
           headers: {
             "Content-Type": "application/json; charset=utf-8"
           }
@@ -44,32 +44,32 @@ const RefereeApp = {
         .then( response => response.json() )
         .then( json => {
           console.log("Returned from post:", json);
-          this.referees = json;
+          this.games = json;
           this.handleResetEdit();
         });
       },
         
       /* Editing data prompt */
-      handleEditReferee(referee) {
-        this.selectedReferee = referee;
-        this.refereeForm = Object.assign({}, this.selectedReferee);
+      handleEditGame(game) {
+        this.selectedGame = game;
+        this.gameForm = Object.assign({}, this.selectedGame);
       },
       
       /* Reset data prompt */
       handleResetEdit() {
-        this.selectedReferee = null;
-        this.refereeForm = {};
+        this.selectedGame = null;
+        this.gameForm = {};
       },
 
       /* Posting edited data */
-      postEditReferee(evt) {
-        this.refereeForm.id = this.selectedReferee.id;
+      postEditGame(evt) {
+        this.gameForm.id = this.selectedGame.id;
     
-        console.log("Editing!", this.refereeForm);
+        console.log("Editing!", this.gameForm);
     
-        fetch('api/referee/update.php', {
+        fetch('api/game/update.php', {
           method:'POST',
-          body: JSON.stringify(this.refereeForm),
+          body: JSON.stringify(this.gameForm),
           headers: {
             "Content-Type": "application/json; charset=utf-8"
           }
@@ -77,22 +77,22 @@ const RefereeApp = {
         .then( response => response.json() )
         .then( json => {
           console.log("Returned from post:", json);
-          this.referees = json;
+          this.games = json;
           this.handleResetEdit();
         });
       },
   
       /* Deleting data information */
-      postDeleteReferee(referee) {
-        if (!confirm("Are you sure you want to delete the selected referee?")) {
+      postDeleteGame(game) {
+        if (!confirm("Are you sure you want to delete the selected game?")) {
           return;
         }
     
-        console.log("Delete!", referee);
+        console.log("Delete!", game);
     
-        fetch('api/referee/delete.php', {
+        fetch('api/game/delete.php', {
           method: 'POST',
-          body: JSON.stringify(referee),
+          body: JSON.stringify(game),
           headers: {
             "Content-Type": "application/json; charset=utf-8"
           }
@@ -100,7 +100,7 @@ const RefereeApp = {
         .then(response => response.json())
         .then(json => {
           console.log("Returned from post:", json);   
-          this.referees = json;
+          this.games = json;
           this.handleResetEdit();
         });
       }
@@ -108,8 +108,8 @@ const RefereeApp = {
     
     /* Loading data to the page */
     created() {
-        this.fetchRefereesData();
+        this.fetchGamesData();
     }
   }
   
-Vue.createApp(RefereeApp).mount('#RefereeApp');
+Vue.createApp(GameApp).mount('#GameApp');

@@ -72,6 +72,26 @@
                     <span>Referee</span>
                 </a>
 
+                <!-- Referee assignment -->
+                <a href="refereeAssignment.html" class="list-group-item list-group-item-action py-2 ripple">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                    </svg>
+                    
+                    <span>Ref. Assignment</span>
+                </a>
+
+                <!-- Reports -->
+                <a href="report.html" class="list-group-item list-group-item-action py-2 ripple">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-data" viewBox="0 0 16 16">
+                        <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
+                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                    </svg>
+                    
+                    <span>Reports</span>
+                </a>
+                
                 </div>
             </div>
         </nav>
@@ -105,55 +125,100 @@
 
     <!--Main layout-->
     <main>
-        <div class="container pt-4">
+        <div class="container pt-4" id="AssignmentApp">
 
-        <!-- Table card -->
-        <!-- Table card was made with support of the following resource: https://bbbootstrap.com/snippets/bootstrap-5-user-social-profile-transition-effect-79746232 -->
-        <div class="container mt-5">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-7">
-                    <div class="card content_card p-3 py-4">
-                    <div class="text-center">
-                        <h1 class="mt-2 mb-0">Referee Assignment</h1> 
-                        <h6>Information about referee assignment to soccer games</h6>
-                    </div>
+            <!-- Table card -->
+            <!-- Table card was made with support of the following resource: https://bbbootstrap.com/snippets/bootstrap-5-user-social-profile-transition-effect-79746232 -->
+            <div class="container mt-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-10">
+                        <div class="card content_card p-3 py-4">
+                            
+                            <div class="text-center">
+                                <h1 class="mt-2 mb-0">Assignment Information</h1> 
+                                <h6>Information about referee assignment to a soccer game</h6>
+                            </div>
 
-                    <!-- Table information -->
-                    <table class="table" id="data_table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry the Bird</td>
-                                <td></td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <!-- Table data -->
+                            <div class="d-flex row">
+                                <!-- Selecting a game to display assignment information -->
+                                <div class="col col-2">
+                                    <div v-for="g in games" v-on:click="selectGame(g)":class="['game', {selected: selectedGame && g.game_id == selectedGame.game_id}]" class="table_data_card">
+                                        <span class="card_title">{{g.title}}</span><br>
+                                        <span class="card_information">{{g.date }}</span><br>
+                                        <span class="card_information">Level: {{g.level}}</span>
+                                    </div>
+                                </div>
 
+                                <!-- Assignment information table -->
+                                <div class="col col-10" v-if="selectedGame">
+                                    <table class="table table-striped" id="data_table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Assigned Referee</th>
+                                                <th scope="col">Referee Status</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="assignment in assignments">
+                                                <td>{{assignment.first_name}} {{assignment.last_name}}</td>
+                                                <td>{{assignment.status}}</td>
+                                                <td>
+                                                    <button type="button" v-on:click="handleEditAssignment(assignment)" class="btn btn-outline-secondary btn-sm">Edit</button>
+                                                    <button type="button" v-on:click="postDeleteAssignment(assignment)" class="btn btn-outline-secondary btn-sm">Delete</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                            <!-- Table form -->
+                            <div class="d-flex row">
+                                <div class="col-4">
+                                    <h3 class="text-center form_text">Add / Edit Assignment Information</h3>
+                                </div>
+
+                                <div class="col-8 data_form">
+                                    <form v-on:submit.prevent="postAssignment" class="needs-validation">  
+                                        <!-- Referee & status information-->
+                                        <div class="from-group row">
+                                                <label class="col-2" for="referee_id">Referee</label>
+                                                <select class="col-4 mb-3" v-model="assignmentForm.referee_id" class="form-control form-control-sm" id="referee_id" required="required">
+                                                   <option v-for="r in referees" :value="r.referee_id">{{r.first_name}} {{r.last_name}}</option> 
+                                                </select>
+
+                                                <label class="col-3" for="status">Referee Status</label>
+                                                <select class="col-3 mb-3" v-model="assignmentForm.status" class="form-control form-control-sm" id="status" required="required">
+                                                    <option value="Accepted">Accepted</option>
+                                                    <option value="Tentative">Tentative</option>
+                                                    <option value="Assigned">Assigned</option>
+                                                    <option value="Unassigned">Unassigned</option>
+                                                </select>
+                                        </div>
+
+                                        <!-- Game id-->
+                                        <label class="col-2" for="game_id">Game</label>
+                                        <select class="col-10 mb-3" v-model="assignmentForm.game_id" class="form-control form-control-sm" id="game_id" required="required">
+                                           <option v-for="g in games" :value="g.game_id">{{g.title}}</option> 
+                                        </select>
+                                                             
+                                        <!-- Submit button -->
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary form_button" >{{ selectedAssignment === null ? "Add" : "Edit"}} Assignment</button>
+                                            <button type="button" class="btn btn-outline-secondary form_button" v-if="selectedAssignment" v-on:click="handleResetEdit">Cancel Edit</button>
+                                        </div>
+                                    
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         <!-- Closing main container -->
         </div>
@@ -173,6 +238,6 @@
         new Tablesort(document.getElementById("data_table"));
     </script>
 
-    <script src="js/index.js"></script>
+    <script src="js/assignment.js"></script>
   </body>
 </html>
